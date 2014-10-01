@@ -1,0 +1,16 @@
+# Git Ignore to stop random things being included
+
+# Java files to ignore
+*.class
+*.jar
+*.war
+*.ear
+
+# Ant file to ignore
+build.xml
+
+# Batch files to ignore
+*.bat
+
+# Shell scripts to ignore
+*.sh
