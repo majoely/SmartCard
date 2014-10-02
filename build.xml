@@ -19,7 +19,7 @@
    <property name="applet.package" value="rmidemo"/>
    <property name="applet.name" value="RMIApplet"/>
    <property name="package.aid" value="0x10:0x20:0x30:0x40:0x50:0x02"/>
-   <property name="applet.aid" value="0x10:0x20:0x30:0x40:0x50:0x03"/>
+   <property name="applet.aid" value="0x10:0x20:0x30:0x40:0x50:0x07"/>
    <property name="script.name" value="RMIScript.scr"/>
    <property name="host.name" value="RMIHost"/>
    

@@ -27,7 +27,7 @@ public class RMIHost
          JCRMIConnect jcRMI = new JCRMIConnect(ca);
          // select the RMIDemoApplet
          System.out.println("Selecting applet");
-         byte[] appletAID = {0x10, 0x20, 0x30, 0x40, 0x50, 0x03};
+         byte[] appletAID = {0x10, 0x20, 0x30, 0x40, 0x50, 0x07};
          jcRMI.selectApplet(appletAID,
             JCRMIConnect.REF_WITH_INTERFACE_NAMES);
          // obtain a proxy stub

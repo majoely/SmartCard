@@ -7,7 +7,7 @@
 *.ear
 
 # Ant file to ignore
-build.xml
+#build.xml
 
 # Batch files to ignore
 *.bat
