@@ -27,10 +27,10 @@ public class RMIApplet extends Applet
    protected RMIApplet()
    {  super();
       // put an initial message "Hello World" in an array
-      byte[] initialMessage
-         = {0x48,0x65,0x6C,0x6C,0x6F,0x20,0x57,0x6F,0x72,0x6C,0x64};
+      //byte[] initialMessage
+        // = {0x48,0x65,0x6C,0x6C,0x6F,0x20,0x57,0x6F,0x72,0x6C,0x64};
       // create the remote object
-      remoteObject = new RMIGreetingImpl(initialMessage);
+      remoteObject = new RMIGreetingImpl();
       // allocate an RMI service and dispatcher to process commands
       dispatcher = new Dispatcher((short)1); // only one service added
       dispatcher.addService(new RMIService(remoteObject),
@@ -39,7 +39,7 @@ public class RMIApplet extends Applet
    
    public static void install(byte[] bArray, short bOffset,
       byte bLength) throws ISOException
-   {  RMIDemoApplet applet = new RMIDemoApplet();
+   {  RMIApplet applet = new RMIApplet();
       // once all memory successfully allocated for applet then
       // register the applet using aid if it was given as parameter
       byte aidLength = bArray[bOffset];

@@ -32,17 +32,31 @@ public class RMIHost
             JCRMIConnect.REF_WITH_INTERFACE_NAMES);
          // obtain a proxy stub
          System.out.println("Getting proxy for remote object");
-         rmidemo.RMIGreeting remoteProxy
-            = (rmidemo.RMIGreeting)jcRMI.getInitialReference();
+         scard.RMIGreeting remoteProxy
+            = (scard.RMIGreeting)jcRMI.getInitialReference();
          System.out.println("Calling a remote method");
-         System.out.println("Greeting is "
-            + new String(remoteProxy.getGreeting()));
-         remoteProxy.setGreeting("Hi there".getBytes());
-         System.out.println("Greeting is "
-            + new String(remoteProxy.getGreeting()));
+		 System.out.println("Adding 10 points");
+		 for (int i = 0; i < 10; i++) {
+			remoteProxy.addPoint();
+		 }
+		 System.out.print("Free coffee ");
+		 if (remoteProxy.hasFreeCoffee()) {
+			System.out.println("? Yes");
+		 } else {
+			System.out.println("? No");
+		 }
+		 System.out.println("Redeeming free coffee");
+		 remoteProxy.getFreeCoffee();
+	  	 System.out.print("Free coffee ");
+		 if (remoteProxy.hasFreeCoffee()) {
+			System.out.println("? Yes");
+		 } else {
+			System.out.println("? No");
+		 }
       }
       catch (RemoteException e)
       {  System.err.println("Remote Exception: " + e);
+	  	 e.printStackTrace();
       }
       catch (Exception e)
       {  System.err.println("Unable to select applet: " + e);

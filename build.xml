@@ -16,9 +16,9 @@
 <project basedir="." default="help" name="RMIDemo">
    
    <!-- Note: CHANGE THE FOLLOWING PROPERTIES FOR ANOTHER APPLET -->
-   <property name="applet.package" value="rmidemo"/>
+   <property name="applet.package" value="scard"/>
    <property name="applet.name" value="RMIApplet"/>
-   <property name="package.aid" value="0x10:0x20:0x30:0x40:0x50:0x02"/>
+   <property name="package.aid" value="0x10:0x20:0x30:0x40:0x50:0x03"/>
    <property name="applet.aid" value="0x10:0x20:0x30:0x40:0x50:0x07"/>
    <property name="script.name" value="RMIScript.scr"/>
    <property name="host.name" value="RMIHost"/>
@@ -31,8 +31,8 @@
    <property name="applet.deploydir" value="EEPROM"/>
    <property name="deploy.name" value="EEFile"/>
    <property name="exportmap" value="exportmap"/>
-   <property name="jdk.home" value="c:/j2sdk"/>
-   <property name="javacardkit.home" value="c:/java_card"/>
+   <property name="jdk.home" value="/usr/bin"/>
+   <property name="javacardkit.home" value="/opt/jcard"/>
    <property name="javacardkit.exports" value="${javacardkit.home}/api_export_files"/>
    <property name="javacardkit.bin" value="${javacardkit.home}/bin"/>
    <property name="javacardkit.lib" value="${javacardkit.home}/lib"/>

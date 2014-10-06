@@ -11,15 +11,44 @@ import javacard.framework.SystemException;
 import javacard.framework.Util;
 import javacard.framework.service.CardRemoteObject;
 
-public class RMIGreetingImpl implements RMIGreeting
-{
-   private byte[] message;
+public class RMIGreetingImpl implements RMIGreeting {
+	
+	//private byte[] message;
+  	private short points;
+
+	public RMIGreetingImpl() {
+		this.points = 0;
+	}
+
+	public boolean hasFreeCoffee() throws RemoteException {	
+		return (this.points > 9);
+	}
+
+	public void addPoint() throws RemoteException {
+		this.points++;	
+	}
+
+	public void undo() throws RemoteException {
+		this.points--;
+	}
+
+	public boolean getFreeCoffee() throws RemoteException {
+		boolean result = false;
+		if (this.points > 9) {
+			this.points -= 10;
+			result = true;	
+		} 
+		return result;
+	}
    
-   public RMIGreetingImpl(byte[] message)
-   {  this.message = message;
-      CardRemoteObject.export(this); // export this remote object
-   }
-   
+
+
+   /*
+	public RMIGreetingImpl(byte[] message) { 	
+		this.message = message;
+		CardRemoteObject.export(this); // export this remote object
+	}
+
    public byte[] getGreeting() throws RemoteException
    {  return message;
    }
@@ -38,7 +67,8 @@ public class RMIGreetingImpl implements RMIGreeting
       {} // ignore as no object deletion mechanism available
    }
 
-   public bute[] verifyPin(byte[] message) throws RemoteException {
-		
+   public byte[] verifyPin(byte[] message) throws RemoteException {
+		return null;
    }
+   */
 }
