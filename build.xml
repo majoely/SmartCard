@@ -125,7 +125,7 @@
    <target name="deploy-applet" depends="convert-applet">
       <mkdir dir="${applet.deploydir}"/>
       <deploycap outEEFile="${applet.deploydir}/${deploy.name}"
-         CrefExe="${javacardkit.home}/bin/cref.exe"
+         CrefExe="${javacardkit.home}/bin/cref"
          CapFile="${applet.builddir}/${applet.package}/javacard/${applet.package}.cap">
          <classpath refid="classpath"/>
       </deploycap>
@@ -136,13 +136,13 @@
          inEEFile="${applet.deploydir}/${deploy.name}"
          outEEFile="${applet.deploydir}/${deploy.name}"
          CheckDownloadFailure="false"
-         CrefExe="${javacardkit.home}/bin/cref.exe">
+         CrefExe="${javacardkit.home}/bin/cref">
          <classpath refid="classpath"/>
       </apdutool>
    </target>
    
    <target name="start-cad">
-      <exec dir="${basedir}" executable="${javacardkit.bin}/cref.exe">
+      <exec dir="${basedir}" executable="${javacardkit.bin}/cref">
          <arg line="-i ${applet.deploydir}/${deploy.name}"/>
          <arg line="-o ${applet.deploydir}/${deploy.name}"/>
       </exec>
