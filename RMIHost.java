@@ -34,6 +34,8 @@ public class RMIHost
          System.out.println("Getting proxy for remote object");
          scard.RMIGreeting remoteProxy
             = (scard.RMIGreeting)jcRMI.getInitialReference();
+		 if (remoteProxy == null)
+		 	System.out.println("RemoteProxy is null");
          System.out.println("Calling a remote method");
 		 System.out.println("Adding 10 points");
 		 for (int i = 0; i < 10; i++) {
@@ -60,6 +62,7 @@ public class RMIHost
       }
       catch (Exception e)
       {  System.err.println("Unable to select applet: " + e);
+	  	e.printStackTrace();
       }
       finally
       {  try

@@ -18,6 +18,7 @@ public class RMIGreetingImpl implements RMIGreeting {
 
 	public RMIGreetingImpl() {
 		this.points = 0;
+		CardRemoteObject.export(this); // export this remote object
 	}
 
 	public boolean hasFreeCoffee() throws RemoteException {	

@@ -165,6 +165,10 @@
    <target name="clean">
       <delete dir="${applet.builddir}"/>
       <delete dir="${applet.deploydir}"/>
+	  <delete>
+	  	<fileset dir="." includes="*.class"/>
+		<fileset dir="scard" includes="*.class"/>
+	  </delete>
    </target>
 
    <target name="help">

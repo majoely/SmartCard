@@ -10,7 +10,7 @@
 build.xml
 
 # Batch files to ignore
-*.bat
+#*.bat
 
 # Shell scripts to ignore
-*.sh
+#*.sh
