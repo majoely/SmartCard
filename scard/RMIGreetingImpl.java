@@ -10,40 +10,63 @@ import javacard.framework.JCSystem;
 import javacard.framework.SystemException;
 import javacard.framework.Util;
 import javacard.framework.service.CardRemoteObject;
+import javacard.framework.OwnerPIN;
+import javacard.framework.ISO7816;
 
 public class RMIGreetingImpl implements RMIGreeting {
 	
 	//private byte[] message;
   	private short points;
+	private OwnerPIN pin;
+	private boolean pinset;
 
-	public RMIGreetingImpl() {
+	public RMIGreetingImpl(OwnerPIN p) {
 		this.points = 0;
+		pin = p;
+		byte[] set = {(byte)1, (byte)2, (byte)3, (byte)4};
+		pin.update(set, (short)0, (byte)set.length);
+		pinset = false;
 		CardRemoteObject.export(this); // export this remote object
 	}
 
 	public boolean hasFreeCoffee() throws RemoteException {	
-		return (this.points > 9);
+		if (pin.isValidated()) {
+			return (this.points > 9);
+		}
+		return false;
 	}
 
 	public void addPoint() throws RemoteException {
-		this.points++;	
+		if (pin.isValidated()) {
+			this.points++;	
+		}
 	}
 
 	public void undo() throws RemoteException {
-		this.points--;
+		if (pin.isValidated()) {
+			this.points--;
+		}
 	}
 
 	public boolean getFreeCoffee() throws RemoteException {
-		boolean result = false;
-		if (this.points > 9) {
-			this.points -= 10;
-			result = true;	
-		} 
-		return result;
+		if (pin.isValidated()) {
+			boolean result = false;
+			if (this.points > 9) {
+				this.points -= 10;
+				result = true;	
+			} 
+			return result;
+		}
+		return false;
 	}
    
+	public boolean isLogIn() throws RemoteException {
+		return pin.isValidated();
+	}
 
-
+	public boolean logIn(byte[] attempt) throws RemoteException {
+		return pin.check(attempt, (short) ISO7816.OFFSET_CDATA, (byte) attempt.length);
+	}
    /*
 	public RMIGreetingImpl(byte[] message) { 	
 		this.message = message;

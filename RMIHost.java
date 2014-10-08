@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 import com.sun.javacard.clientlib.ApduIOCardAccessor;
 import com.sun.javacard.clientlib.CardAccessor;
 import com.sun.javacard.rmiclientlib.JCRMIConnect;
+import java.util.Scanner;
 
 public class RMIHost
 {   
@@ -37,25 +38,30 @@ public class RMIHost
 		 if (remoteProxy == null)
 		 	System.out.println("RemoteProxy is null");
          System.out.println("Calling a remote method");
-		 System.out.println("Adding 10 points");
-		 for (int i = 0; i < 10; i++) {
-			remoteProxy.addPoint();
+		 Scanner in = new Scanner(System.in);
+		 System.out.println("> ");
+		 String next = in.nextLine();
+		 while (!next.equals("exit")) {
+			if (next.equals("login")) {
+		 		System.out.println("pin> ");
+				next = in.nextLine();
+				String[] pin = next.split(" ");
+				byte[] p = new byte[4];
+				for (int i = 0; i < 4; i++) {
+					p[i] = ((Integer) Integer.parseInt(pin[i])).byteValue();
+				}
+				if (p.length == 4) 
+					remoteProxy.logIn(p);
+				else
+					System.out.println("P is not of length 4");
+				if (remoteProxy.isLogIn())
+					System.out.println("Logged in");
+			}
+		 	System.out.println("> ");
+			next = in.nextLine();
 		 }
-		 System.out.print("Free coffee ");
-		 if (remoteProxy.hasFreeCoffee()) {
-			System.out.println("? Yes");
-		 } else {
-			System.out.println("? No");
-		 }
-		 System.out.println("Redeeming free coffee");
-		 remoteProxy.getFreeCoffee();
-	  	 System.out.print("Free coffee ");
-		 if (remoteProxy.hasFreeCoffee()) {
-			System.out.println("? Yes");
-		 } else {
-			System.out.println("? No");
-		 }
-      }
+		 in.close();
+	  }
       catch (RemoteException e)
       {  System.err.println("Remote Exception: " + e);
 	  	 e.printStackTrace();

@@ -18,6 +18,7 @@ import javacard.framework.Applet;
 import javacard.framework.ISOException;
 import javacard.framework.service.Dispatcher;
 import javacard.framework.service.RMIService;
+import javacard.framework.OwnerPIN;
 
 public class RMIApplet extends Applet
 {
@@ -30,7 +31,7 @@ public class RMIApplet extends Applet
       //byte[] initialMessage
         // = {0x48,0x65,0x6C,0x6C,0x6F,0x20,0x57,0x6F,0x72,0x6C,0x64};
       // create the remote object
-      remoteObject = new RMIGreetingImpl();
+      remoteObject = new RMIGreetingImpl(new OwnerPIN((byte) 4, (byte) 4));
       // allocate an RMI service and dispatcher to process commands
       dispatcher = new Dispatcher((short)1); // only one service added
       dispatcher.addService(new RMIService(remoteObject),
