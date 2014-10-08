@@ -56,7 +56,18 @@ public class RMIHost
 					System.out.println("P is not of length 4");
 				if (remoteProxy.isLogIn())
 					System.out.println("Logged in");
+			} else if (next.equals("add")) {
+				remoteProxy.addPoint();
+				System.out.println("Added");
+			} else if (next.equals("redeem")) {
+				if (remoteProxy.hasFreeCoffee()) {
+					remoteProxy.getFreeCoffee();
+					System.out.println("Free coffee");
+				} else {
+					System.out.println("No free coffee yet");
+				}
 			}
+
 		 	System.out.println("> ");
 			next = in.nextLine();
 		 }

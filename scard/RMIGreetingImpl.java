@@ -65,7 +65,8 @@ public class RMIGreetingImpl implements RMIGreeting {
 	}
 
 	public boolean logIn(byte[] attempt) throws RemoteException {
-		return pin.check(attempt, (short) ISO7816.OFFSET_CDATA, (byte) attempt.length);
+		boolean result = pin.check(attempt, (short)0, (byte) attempt.length);
+		return result;
 	}
    /*
 	public RMIGreetingImpl(byte[] message) { 	
