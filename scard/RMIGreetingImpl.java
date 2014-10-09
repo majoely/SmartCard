@@ -36,10 +36,11 @@ public class RMIGreetingImpl implements RMIGreeting {
 		return false;
 	}
 
-	public void addPoint() throws RemoteException {
+	public short addPoint() throws RemoteException {
 		if (pin.isValidated()) {
 			this.points++;	
 		}
+		return this.points;
 	}
 
 	public void undo() throws RemoteException {
@@ -65,9 +66,26 @@ public class RMIGreetingImpl implements RMIGreeting {
 	}
 
 	public boolean logIn(byte[] attempt) throws RemoteException {
-		boolean result = pin.check(attempt, (short)0, (byte) attempt.length);
-		return result;
+		try {
+			boolean result = pin.check(attempt, (short)0, (byte) attempt.length);
+			return result;
+		} catch (Exception e) {
+			return false;
+		}
 	}
+
+	public boolean updateLogin(byte[] attempt) throws RemoteException {
+		if (pin.isValidated()) {
+			try {
+				pin.update(attempt, (short)0, (byte)attempt.length);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		return false;
+	}
+
    /*
 	public RMIGreetingImpl(byte[] message) { 	
 		this.message = message;

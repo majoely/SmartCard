@@ -42,6 +42,8 @@ public class RMIHost
 		 System.out.println("> ");
 		 String next = in.nextLine();
 		 while (!next.equals("exit")) {
+		 	if (!remoteProxy.isLogIn())
+				System.out.println("Log in stupid...");
 			if (next.equals("login")) {
 		 		System.out.println("pin> ");
 				next = in.nextLine();
@@ -57,8 +59,8 @@ public class RMIHost
 				if (remoteProxy.isLogIn())
 					System.out.println("Logged in");
 			} else if (next.equals("add")) {
-				remoteProxy.addPoint();
-				System.out.println("Added");
+				short c = remoteProxy.addPoint();
+				System.out.println("Added [" + c + "]");
 			} else if (next.equals("redeem")) {
 				if (remoteProxy.hasFreeCoffee()) {
 					remoteProxy.getFreeCoffee();
@@ -66,6 +68,20 @@ public class RMIHost
 				} else {
 					System.out.println("No free coffee yet");
 				}
+			} else if (next.equals("update")) {
+				System.out.println("pin> ");
+				next = in.nextLine();
+				String[] pin = next.split(" ");
+				byte[] p = new byte[4];
+				for (int i = 0; i < 4; i++) {
+					p[i] = ((Integer) Integer.parseInt(pin[i])).byteValue();
+				}
+				if (p.length == 4) 
+					if (remoteProxy.updateLogin(p))
+						System.out.println("Updated pin");
+				else
+					System.out.println("P is not of length 4");
+
 			}
 
 		 	System.out.println("> ");
