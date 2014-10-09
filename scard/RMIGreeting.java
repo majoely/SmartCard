@@ -14,7 +14,7 @@ public interface RMIGreeting extends Remote
 	public void undo() throws RemoteException;
 	public boolean getFreeCoffee() throws RemoteException;
 	public boolean isLogIn() throws RemoteException;
-	public boolean logIn(byte[] p) throws RemoteException;
+	public short logIn(byte[] p) throws RemoteException;
 	public boolean updateLogin(byte[] attempt) throws RemoteException;
    //public byte[] getGreeting() throws RemoteException;
    //public void setGreeting(byte[] message) throws RemoteException;

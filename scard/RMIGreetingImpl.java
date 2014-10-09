@@ -65,12 +65,20 @@ public class RMIGreetingImpl implements RMIGreeting {
 		return pin.isValidated();
 	}
 
-	public boolean logIn(byte[] attempt) throws RemoteException {
+	public short logIn(byte[] attempt) throws RemoteException {
 		try {
 			boolean result = pin.check(attempt, (short)0, (byte) attempt.length);
-			return result;
+			byte[] set = {(byte)1, (byte)2, (byte)3, (byte)4};
+			byte test = Util.arrayCompare(attempt, (short)0, set, (short)0, (short)4);
+			boolean isDefault = ((byte)0 == test);
+			if (result && isDefault) {
+				return (short)2;
+			} else {
+				return (short)1;
+			}
+			
 		} catch (Exception e) {
-			return false;
+			return (short)0;
 		}
 	}
 

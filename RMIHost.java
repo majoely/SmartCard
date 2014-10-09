@@ -52,10 +52,13 @@ public class RMIHost
 				for (int i = 0; i < 4; i++) {
 					p[i] = ((Integer) Integer.parseInt(pin[i])).byteValue();
 				}
-				if (p.length == 4) 
-					remoteProxy.logIn(p);
-				else
+				if (p.length == 4) {
+					short out = remoteProxy.logIn(p);
+					if (out == (short)2)
+						System.out.println("!%! WARNING !%! PIN IS DEFAULT CHANGE NOW");
+				} else {
 					System.out.println("P is not of length 4");
+				}
 				if (remoteProxy.isLogIn())
 					System.out.println("Logged in");
 			} else if (next.equals("add")) {
@@ -82,8 +85,9 @@ public class RMIHost
 				else
 					System.out.println("P is not of length 4");
 
+			} else if (next.equals("help")) {
+				System.out.println("login | update | add | redeem | exit");
 			}
-
 		 	System.out.println("> ");
 			next = in.nextLine();
 		 }
